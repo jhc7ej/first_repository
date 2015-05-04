@@ -1,8 +1,8 @@
-Integrating with Nationbuilder to do a manual user login
+Integrating with Nationbuilder to do a manual user authentication
 ==============
 
 ### Introduction
-This tutorial will explain how to integrate Django with Nationbuilder to login a registered user in a Nationbuilder database.  The code covered in this tutorial will take in user login info entered on a Django page and compare it to records in a Nationbuilder database. It will check for a succesfull data match to authenticate the login or return an error specifying the reason why the login was not successful.
+This tutorial will explain how to integrate Django with Nationbuilder to authenticate a registered user in a Nationbuilder database.  The code covered in this tutorial will take in user login info entered on a Django page and compare it to records in a Nationbuilder database. It will check for a succesfull data match to authenticate the login or return an error specifying the reason why the login was not successful.
 
 ### Nationbuilder
 Nationbuilder is a software platform that allows nonprofits political parties to organize their communities.  Nationbuilder handles a people database, website, communications, and donations for parties using it.  Our customer's system was based on Nationbuilder and for our project we interfaced with the information stored there.  More information here: http://nationbuilder.com/
@@ -30,7 +30,7 @@ try:
           
 ```
 By setting the params field to 'json' we indicate that the return string will be in JSON. We can then use the json.loads() function to convert the returned JSON string to a nested Python dictionary.
-If a person exists in the Nationbuilder database that matches the email entered, we save their id listed in the database.
+If a person exists in the Nationbuilder database that matches the email entered, we save their id listed in the database. At this point we can "login" the user by redirecting to another page, if desired.
 
 ### Error checking
 There are 3 things we need to check for errors so in our code: Whether the if statement could find a matching email, whether the API call succeeded, and whether the email form data was vaild.
@@ -45,7 +45,7 @@ else:
          email_form = EmailForm()
          return render(request, 'theHaven/register.html', {'email_form': email_form})
 ```
-The first else statement checks whether the email was not found. The except statement checks whether the API call failed, and the 2nd else statement checked for valid form data.
+The first else statement checks whether the email was not found. The except statement checks whether the API call failed (such as if the API service was temporarily down), and the 2nd else statement checked for valid form data.
 If any of these fails, the render() function renders our template again, passing in appropriate variables that correspond to why the error occurred.
 
 ### Final Code
