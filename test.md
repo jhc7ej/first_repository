@@ -5,7 +5,7 @@ Integrating with Nationbuilder to do a manual user login
 This tutorial will explain how to integrate Django with Nationbuilder to login a registered user in a Nationbuilder database.  The code covered in this tutorial will take in user login info entered on a Django page and compare it to records in a Nationbuilder database. It will check for a succesfull data match to authenticate the login or return an error specifying the reason why the login was not successful.
 
 ### Nationbuilder
-Nationbuilder is a software platform that allows nonprofits political parties to organize their communities.  Nationbuilder handles a people database, website, communications, and donations for parties using it.  Our customer's system was based on Nationbuilder and for our project we interfaced with the information stored there.
+Nationbuilder is a software platform that allows nonprofits political parties to organize their communities.  Nationbuilder handles a people database, website, communications, and donations for parties using it.  Our customer's system was based on Nationbuilder and for our project we interfaced with the information stored there.  More information here: http://nationbuilder.com/
 
 ### Sending form data
 This tutorial will assume that a simple Django page with a form is being used to login. All that is being used in this example is a form with a field for the user to enter in their email address.
@@ -18,7 +18,7 @@ if email_form.is_valid():
 This simply checks whether valid form data is being sent as POST data and normalizes it to keep the format consistent.
 
 ### Making the API call
-Next we will make an API call to the Nationbuilder databse to search for a user whose email matches the one that is entered into the form (note that nation_slug should correspond to your Nationbuilder sites' slug):
+Next we will make an API call to the Nationbuilder databse to search for a user whose email matches the one that is entered into the form (note that nation_slug should correspond to your Nationbuilder site's slug):
 ```
 try:
 	            response = session.get("https://"+nation_slug+".nationbuilder.com/api/v1/people/match?email="+volunteerId,
